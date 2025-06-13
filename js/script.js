@@ -1,7 +1,11 @@
-// Simple chat logic to call an AI API (e.g., OpenAI). Replace YOUR_API_KEY with a valid key.
+// Simple chat logic using the Google Gemini API. Replace YOUR_GEMINI_API_KEY
+// with your actual key.
 const form = document.getElementById('chat-form');
 const messages = document.getElementById('messages');
 const userInput = document.getElementById('user-input');
+
+const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 async function sendMessage(text) {
   const userDiv = document.createElement('div');
@@ -13,19 +17,17 @@ async function sendMessage(text) {
   messages.appendChild(responseDiv);
 
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer YOUR_API_KEY'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: text }]
+        contents: [{ parts: [{ text }] }]
       })
     });
     const data = await response.json();
-    const aiText = data.choices?.[0]?.message?.content || 'Erreur de réponse';
+    const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Erreur de réponse';
     responseDiv.textContent = `IA: ${aiText}`;
   } catch (err) {
     responseDiv.textContent = 'Erreur lors de la connexion à l\'IA';
