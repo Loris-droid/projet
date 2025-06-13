@@ -4,7 +4,7 @@ const form = document.getElementById('chat-form');
 const messages = document.getElementById('messages');
 const userInput = document.getElementById('user-input');
 
-const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
+const GEMINI_API_KEY = 'AIzaSyBwrCB2zM1XHYw2mkWh1U-Nbolaq91yqJQ';
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 async function sendMessage(text) {
