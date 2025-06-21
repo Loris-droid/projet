@@ -4,7 +4,7 @@ const messages = document.getElementById('messages');
 const userInput = document.getElementById('user-input');
 
 //Remplace par ta vraie clé API OpenRouter
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = 'clé';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 async function sendMessage(text) {
